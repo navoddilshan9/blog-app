@@ -36,9 +36,9 @@ export default function Posts() {
                   <HorizontalPost />
                 </Grid>
               )
-            } else if (index == 3) {
+            } else if (index == 4) {
               return (
-                <Grid item xs={12}>
+                <Grid item xs={6}>
                   <Banner />
                 </Grid>
               )

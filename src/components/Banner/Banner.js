@@ -13,9 +13,9 @@ const Banner = () => {
   return (
     <div>
       <div id='wrapper'>
-        <div style={{ width: '100%', marginLeft: '30%' }}>
+        <div style={{ width: '100%', marginTop: '15%', marginLeft: '15%' }}>
           {' '}
-          <svg class='Banner6' height='160' width='100%'>
+          <svg class='Banner6' height='160' width='500'>
             <polygon
               class='BannerBorderEx6'
               points='50 20, 30 130, 420 125, 440 40'

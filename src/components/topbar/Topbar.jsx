@@ -39,9 +39,10 @@ export default function Topbar() {
           )}
           {user && (
             <li className='topListItem'>
-              <a href='https://testblogpost.auth.us-east-1.amazoncognito.com/login?client_id=5fjb4vc3520nruvibi96n2tc84&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone+profile&redirect_uri=http://localhost:3000/'>
+              {/* <a href='https://testblogpost.auth.us-east-1.amazoncognito.com/login?client_id=5fjb4vc3520nruvibi96n2tc84&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone+profile&redirect_uri=http://localhost:3000/'>
                 LOGIN
-              </a>
+              </a> */}
+              LOGIN
             </li>
           )}
         </ul>

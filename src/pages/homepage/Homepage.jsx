@@ -6,7 +6,7 @@ import Sidebar from '../../components/sidebar/Sidebar'
 export default function Homepage() {
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       <div>
         <Posts />
       </div>
