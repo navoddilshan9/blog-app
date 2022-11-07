@@ -4,7 +4,8 @@ import HttpService from '../../services/httpService'
 import './posts.css'
 import { Grid } from '@mui/material'
 import styled from 'styled-components'
-
+import HorizontalPost from '../post/HorizontalPost'
+import Banner from '../Banner/Banner'
 export default function Posts() {
   const [posts, setPosts] = useState(null)
   useEffect(() => {
@@ -23,12 +24,26 @@ export default function Posts() {
         container
         spacing={{ xs: 2, md: 3, lg: 4 }}
         columns={{ xs: 3, sm: 6, md: 9, lg: 12 }}
-        xs={{
+        sx={{
           height: '100%',
         }}
       >
         {posts &&
-          posts.map((post) => {
+          posts.map((post, index) => {
+            if (index == 2) {
+              return (
+                <Grid item xs={6}>
+                  <HorizontalPost />
+                </Grid>
+              )
+            } else if (index == 3) {
+              return (
+                <Grid item xs={12}>
+                  <Banner />
+                </Grid>
+              )
+            }
+
             return (
               <Grid item xs={3}>
                 <Post post={post} />

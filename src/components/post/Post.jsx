@@ -2,10 +2,17 @@
 import './post.css'
 
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
-const Post = () => {
+const Post = ({ post }) => {
+  const navigate = useNavigate()
   return (
-    <div className='posts'>
+    <div
+      className='posts'
+      onClick={() => {
+        navigate(`/post/${post._id}`)
+      }}
+    >
       <article class='card'>
         <header class='card__thumb'>
           <a href='#'>

@@ -1,0 +1,82 @@
+/* Ex6 Styling  */
+/* .Banner6 {
+  display: none;
+} */
+
+.SaleEx6 {
+  /* ex 6 texts  */
+  display: none;
+}
+
+.OffEx6 {
+  /* ex 6 texts  */
+  display: none;
+}
+
+.BannerBorderLineEx6,
+.BannerBorderEx6 {
+  display: none;
+}
+
+.BannerHolderEx6 {
+  display: none;
+}
+
+.circleEx6 {
+  display: none;
+}
+
+.circleEx6Shadow,
+.OffTextEx6 {
+  -webkit-animation: fadeinout 1s linear forwards;
+  animation: fadeinout 4s linear alternate infinite;
+  animation-delay: 0s;
+}
+
+.BorderAnimationEx6 {
+  stroke-dasharray: 4;
+  stroke-dashoffset: 4;
+  animation: BannerBorder 200s linear alternate infinite;
+  animation-delay: 0s;
+}
+
+/* End of Ex6 Styling  */
+
+/* Global Border Animation   */
+@keyframes BannerBorder {
+  from {
+    stroke-dashoffset: 2000;
+  }
+  to {
+    stroke-dashoffset: 1;
+  }
+}
+
+@-webkit-keyframes fadeinout {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeinout {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes example {
+  from {
+    color: red;
+  }
+  to {
+    color: yellow;
+  }
+}
