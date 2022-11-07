@@ -11,15 +11,16 @@ export default function SinglePost() {
   let { id } = useParams()
   const [post, setPost] = useState(null)
   const [edit, setEdit] = useState(false)
+
   useEffect(() => {
     getPost()
   }, [])
+
   const getPost = () => {
     HttpService.post('/v1/blogs/findbyid', {
       _id: id,
     })
       .then((res) => {
-        console.log(res)
         setPost(JSON.parse(res.data.body).message)
         setEdit(false)
       })
@@ -27,9 +28,7 @@ export default function SinglePost() {
         console.log(err)
       })
   }
-  const handleChange = (prop) => (event) => {
-    setPost({ ...post, [prop]: event.target.value })
-  }
+
   const updatePost = () => {
     HttpService.put('/v1/blogs/update', {
       _id: id,
@@ -44,6 +43,11 @@ export default function SinglePost() {
         console.log(err)
       })
   }
+
+  const handleChange = (prop) => (event) => {
+    setPost({ ...post, [prop]: event.target.value })
+  }
+
   return (
     <div className='singlePost'>
       <div className='singlePostWrapper'>
@@ -119,7 +123,7 @@ export default function SinglePost() {
                 variant='contained'
                 sx={{ mt: 3, mb: 2 }}
                 onClick={() => {
-                  // navigate('/')
+                  getPost()
                 }}
               >
                 Discard changes
