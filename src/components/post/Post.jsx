@@ -28,16 +28,10 @@ const Post = ({ post }) => {
             <a href='#'>Category</a>
           </div>
           <div class='card__title'>
-            <a href='#'>Vivamus elementum semper nisivi troscup</a>
+            <a href='#'>{post?.title}</a>
           </div>
           <div class='card__subtitle'>Donec posuere vulputate</div>
-          <p class='card__description'>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore
-            sapiente doloremque recusandae, modi dolore velit, illum itaque
-            minus inventore, omnis et nisi rem facere. Labore sapiente
-            doloremque recusandae, modi dolore velit, illum itaque minus
-            inventore, omnis et nisi rem facere.
-          </p>
+          <p class='card__description'>{post?.story}</p>
         </div>
         <footer class='card__footer'>
           <span class='icon icon--time'>6 min</span>
