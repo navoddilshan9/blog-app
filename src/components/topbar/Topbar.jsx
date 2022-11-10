@@ -20,8 +20,18 @@ export default function Topbar() {
               HOME
             </Link>
           </li>
-          <li className='topListItem'>ABOUT</li>
-          <li className='topListItem'>CONTACT</li>
+          <li className='topListItem'>
+            {' '}
+            <Link className='link' to='/aboutus'>
+              ABOUT
+            </Link>
+          </li>
+          <li className='topListItem'>
+            <Link className='link' to='/cotactus'>
+              CONTACT
+            </Link>
+          </li>
+
           <li className='topListItem'>
             <Link className='link' to='/write'>
               WRITE
@@ -42,7 +52,9 @@ export default function Topbar() {
               {/* <a href='https://testblogpost.auth.us-east-1.amazoncognito.com/login?client_id=5fjb4vc3520nruvibi96n2tc84&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone+profile&redirect_uri=http://localhost:3000/'>
                 LOGIN
               </a> */}
-              LOGIN
+              <Link className='link' to='/login'>
+                LOGIN
+              </Link>
             </li>
           )}
         </ul>
