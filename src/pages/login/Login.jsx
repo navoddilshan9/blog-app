@@ -12,7 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-import axios from 'axios'
+import UserPool from '../../utills/Userpool'
 
 function Copyright(props) {
   return (
@@ -35,28 +35,6 @@ export default function SignIn() {
   const navigate = useNavigate()
   const handleSubmit = async (event) => {
     event.preventDefault()
-    const data = new FormData(event.currentTarget)
-    const body = {
-      username: data.get('email'),
-      password: data.get('password'),
-    }
-    console.log(body)
-    await axios
-      .post('/authenticate', body)
-      .then((res) => {
-        console.log(res)
-        alert(res.data.success)
-        if (res.data.success === 'true') {
-          localStorage.setItem('v_', res.data?.message)
-          navigate('/')
-          window.location.reload(false)
-        } else {
-          alert('Invalid user credentials')
-        }
-      })
-      .catch((err) => {
-        alert('Invalid user credentials')
-      })
   }
 
   return (

@@ -12,6 +12,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
+import Userpool from '../../utills/Userpool'
+import { CognitoUserAttribute } from 'amazon-cognito-identity-js'
 
 function Copyright(props) {
   return (
@@ -37,10 +39,26 @@ export default function SignUp() {
   const handleSubmit = (event) => {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    })
+    const attributeList = []
+    attributeList.push(
+      new CognitoUserAttribute({
+        Name: 'email',
+        Value: data.get('email'),
+      })
+    )
+    Userpool.signUp(
+      data.get('firstName'),
+      data.get('password'),
+      attributeList,
+      null,
+      (err, data) => {
+        if (err) {
+          console.log(err)
+          alert(err)
+        }
+        console.log(data)
+      }
+    )
   }
 
   return (
