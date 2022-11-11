@@ -12,7 +12,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-import UserPool from '../../utills/Userpool'
+import Userpool from '../../utills/Userpool'
+import { CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js'
 
 function Copyright(props) {
   return (
@@ -33,8 +34,33 @@ const theme = createTheme()
 
 export default function SignIn() {
   const navigate = useNavigate()
+  const [email, setEmail] = React.useState()
+  const [password, setPassword] = React.useState()
   const handleSubmit = async (event) => {
     event.preventDefault()
+
+    const user = new CognitoUser({
+      Username: email,
+      Pool: Userpool,
+    })
+
+    const authDetails = new AuthenticationDetails({
+      Username: email,
+      Password: password,
+    })
+    user.authenticateUser(authDetails, {
+      onSuccess: (dtata) => {
+        console.log(dtata)
+        alert(dtata)
+      },
+      onFailure: (err) => {
+        console.log(err)
+        alert(err)
+      },
+      newPasswordRequired: (data) => {
+        console.log(data)
+      },
+    })
   }
 
   return (
@@ -70,6 +96,9 @@ export default function SignIn() {
               name='email'
               autoComplete='email'
               autoFocus
+              onChange={(e) => {
+                setEmail(e.target.value)
+              }}
             />
             <TextField
               margin='normal'
@@ -80,6 +109,9 @@ export default function SignIn() {
               type='password'
               id='password'
               autoComplete='current-password'
+              onChange={(e) => {
+                setPassword(e.target.value)
+              }}
             />
             <FormControlLabel
               control={<Checkbox value='remember' color='primary' />}
