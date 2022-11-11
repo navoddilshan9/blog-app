@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
@@ -12,9 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-import Userpool from '../../utills/Userpool'
-import { CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js'
-
+import { AuthContext } from '../../utills/AuthContext'
 function Copyright(props) {
   return (
     <Typography
@@ -34,33 +32,19 @@ const theme = createTheme()
 
 export default function SignIn() {
   const navigate = useNavigate()
-  const [email, setEmail] = React.useState()
-  const [password, setPassword] = React.useState()
+  const [email, setEmail] = useState()
+  const [password, setPassword] = useState()
+
+  const { authenticate } = useContext(AuthContext)
   const handleSubmit = async (event) => {
     event.preventDefault()
-
-    const user = new CognitoUser({
-      Username: email,
-      Pool: Userpool,
-    })
-
-    const authDetails = new AuthenticationDetails({
-      Username: email,
-      Password: password,
-    })
-    user.authenticateUser(authDetails, {
-      onSuccess: (dtata) => {
-        console.log(dtata)
-        alert(dtata)
-      },
-      onFailure: (err) => {
-        console.log(err)
-        alert(err)
-      },
-      newPasswordRequired: (data) => {
-        console.log(data)
-      },
-    })
+    authenticate(email, password)
+      .then((res) => {
+        console.log('logged in' + res)
+      })
+      .catch((err) => {
+        console.log('logged in' + err)
+      })
   }
 
   return (

@@ -1,10 +1,20 @@
+import { useContext, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+import { AuthContext } from '../../utills/AuthContext'
 import './topbar.css'
 
 export default function Topbar() {
-  const user = true
+  const [status, setStatus] = useState()
+  const { getSession, logout } = useContext(AuthContext)
   const navigate = useNavigate()
+
+  useEffect(() => {
+    getSession().then((session) => {
+      console.log('Session' + session)
+      setStatus(true)
+    })
+  }, [])
   return (
     <div className='top'>
       <div className='topLeft'>
@@ -37,37 +47,28 @@ export default function Topbar() {
               WRITE
             </Link>
           </li>
-          {user && (
-            <li
-              className='topListItem'
-              // onClick={() => {
-              //   na
-              // }}
-            >
-              LOGOUT
-            </li>
-          )}
-          {user && (
-            <li className='topListItem'>
-              {/* <a href='https://testblogpost.auth.us-east-1.amazoncognito.com/login?client_id=5fjb4vc3520nruvibi96n2tc84&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone+profile&redirect_uri=http://localhost:3000/'>
-                LOGIN
-              </a> */}
-              <Link className='link' to='/login'>
-                LOGIN
-              </Link>
-            </li>
-          )}
         </ul>
       </div>
       <div className='topRight'>
-        {user ? (
-          <Link className='link' to='/settings'>
-            <img
-              className='topImg'
-              src='https://images.pexels.com/photos/1858175/pexels-photo-1858175.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500'
-              alt=''
-            />
-          </Link>
+        {status ? (
+          <>
+            <Link className='link' to='/settings'>
+              <img
+                className='topImg'
+                src='https://images.pexels.com/photos/1858175/pexels-photo-1858175.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500'
+                alt=''
+              />
+            </Link>
+            <Link
+              className='link'
+              to='/'
+              onClick={() => {
+                logout()
+              }}
+            >
+              LOGOUT
+            </Link>
+          </>
         ) : (
           <ul className='topList'>
             <li className='topListItem'>
@@ -75,14 +76,13 @@ export default function Topbar() {
                 LOGIN
               </Link>
             </li>
-            <li className='topListItem'>
+            {/* <li className='topListItem'>
               <Link className='link' to='/register'>
                 REGISTER
               </Link>
-            </li>
+            </li> */}
           </ul>
         )}
-        <i className='topSearchIcon fas fa-search'></i>
       </div>
     </div>
   )
