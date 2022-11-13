@@ -63,6 +63,8 @@ export default function Topbar() {
               className='link'
               to='/'
               onClick={() => {
+                navigate('/')
+                window.location.reload()
                 logout()
               }}
             >

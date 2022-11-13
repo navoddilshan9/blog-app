@@ -41,10 +41,17 @@ export default function SignIn() {
     authenticate(email, password)
       .then((res) => {
         console.log(res)
+        navigate('/')
+        window.location.reload()
       })
       .catch((err) => {
         console.log('logged in' + err)
+        info()
       })
+  }
+
+  const info = (res) => {
+    alert('invalid username or passsowrd')
   }
 
   return (
