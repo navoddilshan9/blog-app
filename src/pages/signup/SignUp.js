@@ -46,6 +46,18 @@ export default function SignUp() {
         Value: data.get('email'),
       })
     )
+    attributeList.push(
+      new CognitoUserAttribute({
+        Name: 'custom:firstName',
+        Value: data.get('firstName'),
+      })
+    )
+    attributeList.push(
+      new CognitoUserAttribute({
+        Name: 'custom:lastName',
+        Value: data.get('lastName'),
+      })
+    )
     Userpool.signUp(
       data.get('firstName'),
       data.get('password'),
