@@ -49,7 +49,7 @@ const HorizontalPost = () => {
           </p>
         </div>
       </div>
-      <div class='blog-card alt'>
+      {/* <div class='blog-card alt'>
         <div class='meta'>
           <div
             class='photo'
@@ -90,7 +90,7 @@ const HorizontalPost = () => {
             <a href='#'>Read More</a>
           </p>
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }

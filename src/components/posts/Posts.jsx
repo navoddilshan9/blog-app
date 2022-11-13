@@ -30,13 +30,13 @@ export default function Posts() {
       >
         {posts &&
           posts.map((post, index) => {
-            if (index == 2) {
+            if (index == 7 || index == 8) {
               return (
                 <Grid item xs={6}>
-                  <HorizontalPost />
+                  <HorizontalPost post={post} />
                 </Grid>
               )
-            } else if (index == 4) {
+            } else if (index == 5) {
               return (
                 <Grid item xs={6}>
                   <Banner />
