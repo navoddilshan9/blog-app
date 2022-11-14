@@ -13,7 +13,7 @@ const DropZone = ({ setImage }) => {
       console.log(formData)
       HttpService.post('/images', formData)
         .then((res) => {
-          console.log(res)
+          setImage(res.data.imagePath)
         })
         .catch((err) => {
           console.log(err)

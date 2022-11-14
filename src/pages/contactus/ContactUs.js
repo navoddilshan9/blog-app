@@ -2,7 +2,7 @@ import React from 'react'
 import './custom.css'
 const Contactus = () => {
   return (
-    <div>
+    <div className='contactForm'>
       <section className='ftco-section'>
         <div className='container'>
           <div className='row justify-content-center'>

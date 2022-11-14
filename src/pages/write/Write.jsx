@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import DropZone from '../../components/DropZone/DropZone'
 import HttpService from '../../services/httpService'
 import './write.css'
@@ -7,24 +8,37 @@ export default function Write() {
   const [image, setImage] = useState(null)
   const [title, setTitle] = useState(null)
   const [story, setStory] = useState(null)
+  const [tags, setTags] = useState(null)
+
+  const navigate = useNavigate()
 
   const submit = (event) => {
     event.preventDefault()
     console.log({
       title: title,
-      description: story,
+      story: story,
+      image: image,
+      tags: tags,
     })
-    HttpService.post('/v1//blogs/create', {
-      title: title,
-      description: story,
-    })
-      .then((res) => {
-        console.log('res')
+    if (title && story && image && tags) {
+      HttpService.post('/v1//blogs/create', {
+        title: title,
+        story: story,
+        image: image,
+        tags: tags,
       })
-      .catch((err) => {
-        console.log(err)
-      })
+        .then((res) => {
+          console.log('res')
+          navigate('/')
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    } else {
+      alert('refresh and try again')
+    }
   }
+
   return (
     <div className='write'>
       <img
@@ -32,13 +46,10 @@ export default function Write() {
         src='https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500'
         alt=''
       />
-      <DropZone setImage={setImage} />
+      {!image ? <DropZone setImage={setImage} /> : <></>}
+
       <form className='writeForm' onSubmit={submit}>
         <div className='writeFormGroup'>
-          <label htmlFor='fileInput'>
-            <i className='writeIcon fas fa-plus'></i>
-          </label>
-          <input id='fileInput' type='file' style={{ display: 'none' }} />
           <input
             className='writeInput'
             placeholder='Title'
@@ -46,6 +57,18 @@ export default function Write() {
             autoFocus={true}
             onChange={(e) => {
               setTitle(e.target.value)
+            }}
+          />
+        </div>
+        <div className='writeFormGroup'>
+          <input
+            className='writeInput'
+            placeholder='Tags'
+            type='text'
+            autoFocus={true}
+            style={{ fontSize: '20px' }}
+            onChange={(e) => {
+              setTags(e.target.value)
             }}
           />
         </div>
