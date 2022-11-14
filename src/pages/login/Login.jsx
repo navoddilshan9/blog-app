@@ -40,12 +40,10 @@ export default function SignIn() {
     event.preventDefault()
     authenticate(email, password)
       .then((res) => {
-        console.log(res)
         navigate('/')
         window.location.reload()
       })
       .catch((err) => {
-        console.log('logged in' + err)
         info()
       })
   }

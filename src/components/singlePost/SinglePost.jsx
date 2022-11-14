@@ -1,6 +1,6 @@
 import { TextareaAutosize, TextField } from '@mui/material'
 import { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -9,6 +9,7 @@ import './singlePost.css'
 
 export default function SinglePost() {
   let { id } = useParams()
+  const navigate = useNavigate()
   const [post, setPost] = useState(null)
   const [edit, setEdit] = useState(false)
 
@@ -44,6 +45,19 @@ export default function SinglePost() {
       })
   }
 
+  const deletePost = (id) => {
+    HttpService.put('/v1/blogs/delete', {
+      _id: id,
+      title: post.title,
+      story: post.story,
+    })
+      .then((res) => {
+        navigate('/')
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
   const handleChange = (prop) => (event) => {
     setPost({ ...post, [prop]: event.target.value })
   }
@@ -75,7 +89,12 @@ export default function SinglePost() {
                     setEdit(true)
                   }}
                 ></i>
-                <i className='singlePostIcon far fa-trash-alt'></i>
+                <i
+                  className='singlePostIcon far fa-trash-alt'
+                  onClick={() => {
+                    deletePost(post._id)
+                  }}
+                ></i>
               </div>
             </h1>
             <div className='singlePostInfo'>

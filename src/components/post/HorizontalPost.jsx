@@ -1,6 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './post.css'
-const HorizontalPost = () => {
+const HorizontalPost = ({ post }) => {
   return (
     <div>
       <div class='blog-card'>
@@ -36,16 +37,11 @@ const HorizontalPost = () => {
           </ul>
         </div>
         <div class='description'>
-          <h1>Learning to Code</h1>
+          <h1>{post?.title}</h1>
           <h2>Opening a door to the future</h2>
-          <p>
-            {' '}
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eum
-            dolorum architecto obcaecati enim dicta praesentium, quam nobis!
-            Neque ad aliquam facilis numquam. Veritatis, sit.
-          </p>
+          <p> {post?.story}</p>
           <p class='read-more'>
-            <a href='#'>Read More</a>
+            <Link to={`/post/${post._id}`}>Read More</Link>
           </p>
         </div>
       </div>

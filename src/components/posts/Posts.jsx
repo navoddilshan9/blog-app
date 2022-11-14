@@ -6,6 +6,7 @@ import { Grid } from '@mui/material'
 import styled from 'styled-components'
 import HorizontalPost from '../post/HorizontalPost'
 import Banner from '../Banner/Banner'
+import Skeleton from '@mui/material/Skeleton'
 export default function Posts() {
   const [posts, setPosts] = useState(null)
   useEffect(() => {
@@ -28,7 +29,7 @@ export default function Posts() {
           height: '100%',
         }}
       >
-        {posts &&
+        {posts ? (
           posts.map((post, index) => {
             if (index == 7 || index == 8) {
               return (
@@ -49,7 +50,38 @@ export default function Posts() {
                 <Post post={post} />
               </Grid>
             )
-          })}
+          })
+        ) : (
+          <>
+            {[1, 2, 3, 4].map((i) => {
+              return (
+                <Grid item xs={3}>
+                  <Skeleton
+                    variant='rounded'
+                    width={'100%'}
+                    height={150}
+                    sx={{ marginBottom: '10px' }}
+                  />
+                  <Skeleton
+                    variant='rectangular'
+                    width={'90%'}
+                    sx={{ marginBottom: '10px' }}
+                  />
+                  <Skeleton
+                    variant='rectangular'
+                    width={'90%'}
+                    sx={{ marginBottom: '10px' }}
+                  />
+                  <Skeleton
+                    variant='rectangular'
+                    width={'90%'}
+                    sx={{ marginBottom: '10px' }}
+                  />
+                </Grid>
+              )
+            })}
+          </>
+        )}
       </Grid>
     </Container>
   )
