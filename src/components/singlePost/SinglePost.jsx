@@ -1,14 +1,18 @@
-import { TextareaAutosize, TextField } from '@mui/material'
+import { Alert, TextareaAutosize, TextField } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
+import Backdrop from '@mui/material/Backdrop'
+import CircularProgress from '@mui/material/CircularProgress'
+
 import HttpService from '../../services/httpService'
 import './singlePost.css'
 
 export default function SinglePost() {
   let { id } = useParams()
+  const [open, setOpen] = useState(true)
   const navigate = useNavigate()
   const [post, setPost] = useState(null)
   const [edit, setEdit] = useState(false)
@@ -16,21 +20,27 @@ export default function SinglePost() {
   useEffect(() => {
     getPost()
   }, [])
-
+  useEffect(() => {
+    console.log(open)
+  }, [open])
   const getPost = () => {
+    setOpen(true)
     HttpService.post('/v1/blogs/findbyid', {
       _id: id,
     })
       .then((res) => {
         setPost(JSON.parse(res.data.body).message)
         setEdit(false)
+        setOpen(false)
       })
       .catch((err) => {
         console.log(err)
+        setOpen(false)
       })
   }
 
   const updatePost = () => {
+    setOpen(true)
     HttpService.put('/v1/blogs/update', {
       _id: id,
       title: post.title,
@@ -39,9 +49,11 @@ export default function SinglePost() {
       .then((res) => {
         console.log(res)
         getPost()
+        setOpen(false)
       })
       .catch((err) => {
         console.log(err)
+        setOpen(false)
       })
   }
 
@@ -126,9 +138,12 @@ export default function SinglePost() {
             </p>
           </>
         ) : (
-          <>Not Found</>
+          <>
+            <Alert severity='info'>Please be patient!</Alert>{' '}
+          </>
         )}
       </div>
+
       {edit ? (
         <>
           <Grid
@@ -165,6 +180,15 @@ export default function SinglePost() {
       ) : (
         <></>
       )}
+      <Backdrop
+        sx={{
+          color: '#fff',
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+        }}
+        open={open}
+      >
+        <CircularProgress color='inherit' />
+      </Backdrop>
     </div>
   )
 }
