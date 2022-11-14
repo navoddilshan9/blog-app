@@ -5,11 +5,11 @@ import Sidebar from '../../components/sidebar/Sidebar'
 
 export default function Homepage() {
   return (
-    <>
+    <div style={{ marginBottom: '100px' }}>
       <Header />
       <div>
         <Posts />
       </div>
-    </>
+    </div>
   )
 }
