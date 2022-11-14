@@ -9,8 +9,7 @@ const HorizontalPost = ({ post }) => {
           <div
             class='photo'
             style={{
-              backgroundImage:
-                'url(https://storage.googleapis.com/chydlx/codepen/blog-cards/image-1.jpg)',
+              backgroundImage: `url(${post?.image})`,
             }}
           ></div>
           <ul class='details'>

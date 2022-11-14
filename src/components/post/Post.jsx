@@ -5,7 +5,13 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 const Post = ({ post }) => {
   const navigate = useNavigate()
+  const date = new Date(post?.createdAt)
+  function getMonthName(monthNumber) {
+    const date = new Date()
+    date.setMonth(monthNumber - 1)
 
+    return date.toLocaleString('en-US', { month: 'long' })
+  }
   return (
     <div
       className='posts'
@@ -20,8 +26,10 @@ const Post = ({ post }) => {
           </a>
         </header>
         <div class='card__date'>
-          <span class='card__date__day'>23</span>
-          <span class='card__date__month'>Mai</span>
+          <span class='card__date__day'>{date.getDate()}</span>
+          <span class='card__date__month'>
+            {getMonthName(date.getMonth()).substring(0, 3)}
+          </span>
         </div>
         <div class='card__body'>
           <div class='card__category'>
