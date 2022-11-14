@@ -9,6 +9,7 @@ import CircularProgress from '@mui/material/CircularProgress'
 
 import HttpService from '../../services/httpService'
 import './singlePost.css'
+import axios from 'axios'
 
 export default function SinglePost() {
   let { id } = useParams()
@@ -20,14 +21,13 @@ export default function SinglePost() {
   useEffect(() => {
     getPost()
   }, [])
-  useEffect(() => {
-    console.log(open)
-  }, [open])
+
   const getPost = () => {
     setOpen(true)
-    HttpService.post('/v1/blogs/findbyid', {
-      _id: id,
-    })
+    axios
+      .post('/v1/blogs/findbyid', {
+        _id: id,
+      })
       .then((res) => {
         setPost(JSON.parse(res.data.body).message)
         setEdit(false)
@@ -41,11 +41,12 @@ export default function SinglePost() {
 
   const updatePost = () => {
     setOpen(true)
-    HttpService.put('/v1/blogs/update', {
-      _id: id,
-      title: post.title,
-      story: post.story,
-    })
+    axios
+      .put('/v1/blogs/update', {
+        _id: id,
+        title: post.title,
+        story: post.story,
+      })
       .then((res) => {
         console.log(res)
         getPost()

@@ -7,10 +7,13 @@ import styled from 'styled-components'
 import HorizontalPost from '../post/HorizontalPost'
 import Banner from '../Banner/Banner'
 import Skeleton from '@mui/material/Skeleton'
+import axios from 'axios'
 export default function Posts() {
   const [posts, setPosts] = useState(null)
   useEffect(() => {
-    HttpService.get('/v1//blogs')
+    HttpService.get('/v1/blogs', {
+      crossdomain: true,
+    })
       .then((res) => {
         setPosts(JSON.parse(res.data.body).message)
       })
