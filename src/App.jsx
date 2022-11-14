@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 import Topbar from './components/topbar/Topbar'
 
 import { Context } from './utills/AuthContext'

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import { AuthContext } from './AuthContext'
 import Homepage from '../pages/homepage/Homepage'
 import Login from '../pages/login/Login'
@@ -14,7 +14,7 @@ import SignUp from '../pages/signup/SignUp'
 const Status = () => {
   const [status, setStatus] = useState()
 
-  const { getSession, logout } = useContext(AuthContext)
+  const { getSession } = useContext(AuthContext)
 
   useEffect(() => {
     getSession().then((session) => {

@@ -7,7 +7,7 @@ import styled from 'styled-components'
 import HorizontalPost from '../post/HorizontalPost'
 import Banner from '../Banner/Banner'
 import Skeleton from '@mui/material/Skeleton'
-import axios from 'axios'
+
 export default function Posts() {
   const [posts, setPosts] = useState(null)
   useEffect(() => {
@@ -34,13 +34,13 @@ export default function Posts() {
       >
         {posts ? (
           posts.map((post, index) => {
-            if (index == 7 || index == 8) {
+            if (index === 7 || index === 8) {
               return (
                 <Grid item xs={6}>
                   <HorizontalPost post={post} />
                 </Grid>
               )
-            } else if (index == 5) {
+            } else if (index === 5) {
               return (
                 <Grid item xs={6}>
                   <Banner />

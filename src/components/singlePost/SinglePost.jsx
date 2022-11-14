@@ -2,14 +2,12 @@ import { Alert, TextareaAutosize, TextField } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import Grid from '@mui/material/Grid'
-import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Backdrop from '@mui/material/Backdrop'
 import CircularProgress from '@mui/material/CircularProgress'
 
 import HttpService from '../../services/httpService'
 import './singlePost.css'
-import axios from 'axios'
 
 export default function SinglePost() {
   let { id } = useParams()
@@ -24,10 +22,9 @@ export default function SinglePost() {
 
   const getPost = () => {
     setOpen(true)
-    axios
-      .post('/v1/blogs/findbyid', {
-        _id: id,
-      })
+    HttpService.post('/v1/blogs/findbyid', {
+      _id: id,
+    })
       .then((res) => {
         setPost(JSON.parse(res.data.body).message)
         setEdit(false)
@@ -41,12 +38,11 @@ export default function SinglePost() {
 
   const updatePost = () => {
     setOpen(true)
-    axios
-      .put('/v1/blogs/update', {
-        _id: id,
-        title: post.title,
-        story: post.story,
-      })
+    HttpService.put('/v1/blogs/update', {
+      _id: id,
+      title: post.title,
+      story: post.story,
+    })
       .then((res) => {
         console.log(res)
         getPost()
@@ -80,7 +76,7 @@ export default function SinglePost() {
       <div className='singlePostWrapper'>
         {post ? (
           <>
-            <img className='singlePostImg' src={post.image} alt='' />
+            <img className='singlePostImg' src={post?.image} alt='' />
             <h1 className='singlePostTitle'>
               {edit ? (
                 <>

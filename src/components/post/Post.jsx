@@ -1,21 +1,11 @@
 // import { Link } from 'react-router-dom'
 import './post.css'
 
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import HttpService from '../../services/httpService'
 const Post = ({ post }) => {
   const navigate = useNavigate()
-  const [image, setImage] = useState()
-  useEffect(() => {
-    getImage()
-  }, [])
 
-  const getImage = () => {
-    HttpService.get(post?.image).then((res) => {
-      setImage(res?.data)
-    })
-  }
   return (
     <div
       className='posts'
