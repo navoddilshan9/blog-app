@@ -61,7 +61,7 @@
 .card__body {
   position: relative;
   padding: 20px;
-  height: 185px;
+  height: 155px;
   transition: height 0.3s;
 }
 .card:hover .card__body {

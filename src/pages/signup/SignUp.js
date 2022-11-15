@@ -14,6 +14,7 @@ import Container from '@mui/material/Container'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import Userpool from '../../utills/Userpool'
 import { CognitoUserAttribute } from 'amazon-cognito-identity-js'
+import { useNavigate } from 'react-router-dom'
 
 function Copyright(props) {
   return (
@@ -36,9 +37,11 @@ function Copyright(props) {
 const theme = createTheme()
 
 export default function SignUp() {
+  const navigate = useNavigate()
   const handleSubmit = (event) => {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
+
     const attributeList = []
     attributeList.push(
       new CognitoUserAttribute({
@@ -58,23 +61,28 @@ export default function SignUp() {
         Value: data.get('lastName'),
       })
     )
-    Userpool.signUp(
-      data.get('firstName'),
-      data.get('password'),
-      attributeList,
-      null,
-      (err, data) => {
-        if (err) {
-          console.log(err)
-          alert(err)
+    if (data.get('password') === data.get('repassword')) {
+      Userpool.signUp(
+        data.get('firstName'),
+        data.get('password'),
+        attributeList,
+        null,
+        (err, data) => {
+          if (err) {
+            console.log(err)
+            alert(err)
+          }
+          navigate('/login')
         }
-        console.log(data)
-      }
-    )
+      )
+    } else {
+      alert('password are missed match')
+    }
   }
 
   return (
     <ThemeProvider theme={theme}>
+      {/* <CenterNotification /> */}
       <Container component='main' maxWidth='xs'>
         <CssBaseline />
         <Box
@@ -137,6 +145,17 @@ export default function SignUp() {
                   label='Password'
                   type='password'
                   id='password'
+                  autoComplete='new-password'
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name='repassword'
+                  label='Re-Password'
+                  type='password'
+                  id='repassword'
                   autoComplete='new-password'
                 />
               </Grid>

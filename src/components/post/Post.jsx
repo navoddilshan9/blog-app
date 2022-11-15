@@ -1,6 +1,6 @@
 // import { Link } from 'react-router-dom'
 import './post.css'
-
+import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 const Post = ({ post }) => {
@@ -33,21 +33,22 @@ const Post = ({ post }) => {
         </div>
         <div class='card__body'>
           <div class='card__category'>
-            <a href='#'>{post?.tags.replace(',', '/')}</a>
+            <a href='#'>{post?.tags?.replace(',', '/')}</a>
           </div>
           <div class='card__title'>
             <a href='#'>{post?.title}</a>
           </div>
           <div class='card__subtitle'>Donec posuere vulputate</div>
-          <p class='card__description'>{post?.story.substring(0, 150)}</p>
+          <p class='card__description'>{post?.story?.substring(0, 150)}...</p>
         </div>
         <footer class='card__footer'>
-          <span class='icon icon--time'>
-            {(post?.story.length / 1000).toFixed(0)} min
+          <span class='icon '>
+            {(post?.story?.length / 1000).toFixed(0)} min read
           </span>
-          <span class='icon icon--comment'>
-            <a href='#'>2 claps</a>
+          <span class='icon' style={{ marginLeft: '10px' }}>
+            <ThumbUpAltIcon style={{ fontSize: '20px' }} />
           </span>
+          <span class='icon'>1 like</span>
         </footer>
       </article>
     </div>
