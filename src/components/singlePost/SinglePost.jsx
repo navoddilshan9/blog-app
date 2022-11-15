@@ -55,15 +55,18 @@ export default function SinglePost() {
   }
 
   const deletePost = (id) => {
-    HttpService.put('/v1/blogs/delete', {
+    setOpen(true)
+    console.log(id)
+    HttpService.post('/v1/blogs/delete', {
       _id: id,
-      title: post.title,
-      story: post.story,
     })
       .then((res) => {
+        console.log(res)
+        setOpen(false)
         navigate('/')
       })
       .catch((err) => {
+        setOpen(false)
         console.log(err)
       })
   }

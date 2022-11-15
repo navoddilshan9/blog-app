@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { AuthContext } from '../../utills/AuthContext'
+import { Alert } from '@mui/material'
 function Copyright(props) {
   return (
     <Typography
@@ -34,7 +35,7 @@ export default function SignIn() {
   const navigate = useNavigate()
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
-
+  const [error, setError] = useState()
   const { authenticate } = useContext(AuthContext)
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -44,12 +45,8 @@ export default function SignIn() {
         window.location.reload()
       })
       .catch((err) => {
-        info()
+        setError(err)
       })
-  }
-
-  const info = (res) => {
-    alert('invalid username or passsowrd')
   }
 
   return (
@@ -76,6 +73,14 @@ export default function SignIn() {
             noValidate
             sx={{ mt: 1 }}
           >
+            {error ? (
+              <>
+                <Alert severity='info'>Invalid user name or passowrd</Alert>
+              </>
+            ) : (
+              <></>
+            )}
+
             <TextField
               margin='normal'
               required
@@ -87,6 +92,7 @@ export default function SignIn() {
               autoFocus
               onChange={(e) => {
                 setEmail(e.target.value)
+                setError()
               }}
             />
             <TextField
@@ -100,6 +106,7 @@ export default function SignIn() {
               autoComplete='current-password'
               onChange={(e) => {
                 setPassword(e.target.value)
+                setError()
               }}
             />
             <FormControlLabel

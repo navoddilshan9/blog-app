@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useState } from 'react'
 import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
 import CssBaseline from '@mui/material/CssBaseline'
@@ -15,6 +15,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 import Userpool from '../../utills/Userpool'
 import { CognitoUserAttribute } from 'amazon-cognito-identity-js'
 import { useNavigate } from 'react-router-dom'
+import { Alert } from '@mui/material'
 
 function Copyright(props) {
   return (
@@ -38,6 +39,7 @@ const theme = createTheme()
 
 export default function SignUp() {
   const navigate = useNavigate()
+  const [error, setError] = useState()
   const handleSubmit = (event) => {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
@@ -70,13 +72,13 @@ export default function SignUp() {
         (err, data) => {
           if (err) {
             console.log(err)
-            alert(err)
+            setError(err)
           }
           navigate('/login')
         }
       )
     } else {
-      alert('password are missed match')
+      setError('password are missed match')
     }
   }
 
@@ -96,6 +98,15 @@ export default function SignUp() {
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
+          {error ? (
+            <>
+              {' '}
+              <Alert severity='info'>Registration failed !</Alert>
+            </>
+          ) : (
+            <></>
+          )}
+
           <Typography component='h1' variant='h5'>
             Sign up
           </Typography>

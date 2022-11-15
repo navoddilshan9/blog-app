@@ -16,6 +16,7 @@ export default function Posts() {
     })
       .then((res) => {
         setPosts(JSON.parse(res.data.body).message)
+        console.log(posts?.length)
       })
       .catch((err) => {
         console.log(err)
@@ -47,7 +48,6 @@ export default function Posts() {
                 </Grid>
               )
             }
-
             return (
               <Grid item xs={3}>
                 <Post post={post} />
