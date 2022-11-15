@@ -19,11 +19,15 @@ const Post = ({ post }) => {
       }}
     >
       <article class='card'>
-        <header class='card__thumb'>
-          <a href='#'>
-            <img src={post?.image} />
-          </a>
-        </header>
+        <header
+          class='card__thumb'
+          style={{
+            backgroundImage: `url(${post?.image})`,
+            backgroundPosition: 'cover',
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+          }}
+        ></header>
         <div class='card__date'>
           <span class='card__date__day'>{date.getDate()}</span>
           <span class='card__date__month'>
