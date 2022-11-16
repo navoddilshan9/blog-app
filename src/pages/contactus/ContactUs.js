@@ -68,7 +68,11 @@ const Contactus = () => {
                               <input
                                 type='submit'
                                 value='Send Message'
-                                className='btn btn-primary'
+                                className='btn '
+                                style={{
+                                  background: '#0F100C',
+                                  color: 'white',
+                                }}
                               />
                               <div className='submitting'></div>
                             </div>
@@ -78,7 +82,10 @@ const Contactus = () => {
                     </div>
                   </div>
                   <div className='col-md-5 d-flex align-items-stretch'>
-                    <div className='info-wrap bg-primary w-100 p-lg-5 p-4'>
+                    <div
+                      className='info-wrap  w-100 p-lg-5 p-4'
+                      style={{ background: '#0F100C' }}
+                    >
                       <h3 className='mb-4 mt-md-4'>Contact us</h3>
                       <div className='dbox w-100 d-flex align-items-start'>
                         <div className='icon d-flex align-items-center justify-content-center'>
@@ -121,7 +128,7 @@ const Contactus = () => {
                         </div>
                         <div className='text pl-3'>
                           <p>
-                            <span>Website</span> <a href='#'>yoursite.com</a>
+                            <span>Website</span> <a href='#'>FIT19</a>
                           </p>
                         </div>
                       </div>

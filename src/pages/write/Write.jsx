@@ -50,7 +50,7 @@ export default function Write() {
 
   return (
     <div className='write'>
-      <div className='writeImg' src='' alt=''></div>
+      <div className='writeImg'></div>
       {!image ? <DropZone setImage={setImage} /> : <></>}
 
       <form className='writeForm' onSubmit={submit}>

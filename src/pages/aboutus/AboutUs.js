@@ -1,16 +1,26 @@
 import React from 'react'
+import Sidebar from '../../components/sidebar/Sidebar'
 
 const Aboutus = () => {
   return (
     <div>
       <div
         className='w3-container w3-content w3-center w3-padding-64'
-        style={{ maxWidth: '800px', minHeight: '83vh' }}
+        style={{
+          marginTop: '5%',
+          maxWidth: '80%',
+          marginLeft: '10%',
+          minHeight: '83vh',
+          display: 'flex',
+          flexDirection: 'column',
+          alignContent: 'center',
+          alignItems: 'center',
+        }}
         id='band'
       >
-        <h2 className='w3-wide'>THE BAND</h2>
+        <h2 className='w3-wide'>Q Publication</h2>
         <p className='w3-opacity'>
-          <i>We love music</i>
+          <i>We love to read</i>
         </p>
         <p class='w3-justify'>
           We have created a fictional band website. Lorem ipsum dolor sit amet,
@@ -29,28 +39,10 @@ const Aboutus = () => {
           <div className='w3-third'>
             <p>Name</p>
             <img
-              src='/w3images/bandmember.jpg'
+              src='https://res.cloudinary.com/uom/image/upload/v1668624886/NP/mikolaj-DCzpr09cTXY-unsplash_lrf8gg.jpg'
               class='w3-round w3-margin-bottom'
               alt='Random Name'
-              style={{ width: '60%' }}
-            />
-          </div>
-          <div className='w3-third'>
-            <p>Name</p>
-            <img
-              src='/w3images/bandmember.jpg'
-              className='w3-round w3-margin-bottom'
-              alt='Random Name'
-              style={{ width: '60%' }}
-            />
-          </div>
-          <div className='w3-third'>
-            <p>Name</p>
-            <img
-              src='/w3images/bandmember.jpg'
-              class='w3-round'
-              alt='Random Name'
-              style={{ width: '60%' }}
+              style={{ width: '60%', marginLeft: '20%' }}
             />
           </div>
         </div>

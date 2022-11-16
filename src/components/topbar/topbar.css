@@ -42,6 +42,7 @@
   font-size: 18px;
   font-weight: bolder;
   cursor: pointer;
+  color: #0f100c;
 }
 
 .topListItem:hover {

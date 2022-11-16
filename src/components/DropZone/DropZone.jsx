@@ -25,7 +25,9 @@ const DropZone = ({ setImage }) => {
       {({ getRootProps, getInputProps }) => (
         <div {...getRootProps({ className: 'dropzone' })}>
           <input {...getInputProps()} />
-          <p>Drag the image, or click to select image</p>
+          <p style={{ color: '#0F100C' }}>
+            Drag the image, or click to select image
+          </p>
         </div>
       )}
     </Dropzone>

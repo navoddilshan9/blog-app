@@ -1,64 +1,55 @@
-import { Link } from "react-router-dom";
-import "./sidebar.css";
-
+import { Button, IconButton, TextField } from '@mui/material'
+import { Link } from 'react-router-dom'
+import './sidebar.css'
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
 export default function Sidebar() {
   return (
-    <div className="sidebar">
-      <div className="sidebarItem">
-        <span className="sidebarTitle">ABOUT ME</span>
-        <img
-          src="https://themegoods-cdn-pzbycso8wng.stackpathdns.com/grandblog/demo/wp-content/uploads/2015/11/aboutme.jpg"
-          alt=""
+    <div className='sidebar'>
+      <div className='sidebarItem'>
+        <Button
+          variant='contained'
+          color='success'
+          sx={{ bgcolor: '#0F100C' }}
+          fullWidth
+        >
+          Get Premium
+        </Button>
+        <TextField
+          fullWidth
+          id='standard-bare'
+          variant='outlined'
+          sx={{ marginTop: '50px' }}
+          defaultValue='How can we help'
+          InputProps={{
+            endAdornment: (
+              <IconButton>
+                <SearchOutlinedIcon />
+              </IconButton>
+            ),
+          }}
         />
         <p>
-          Laboris sunt aute cupidatat velit magna velit ullamco dolore mollit
-          amet ex esse.Sunt eu ut nostrud id quis proident.
+          <i>
+            {' '}
+            <b>
+              {' '}
+              “The more that you read, the more things you will know. The more
+              that you learn, the more places you’ll go.”
+            </b>
+          </i>
+          Dr. Seuss
         </p>
       </div>
-      <div className="sidebarItem">
-        <span className="sidebarTitle">CATEGORIES</span>
-        <ul className="sidebarList">
-          <li className="sidebarListItem">
-            <Link className="link" to="/posts?cat=Life">
-              Life
-            </Link>
-          </li>
-          <li className="sidebarListItem">
-            <Link className="link" to="/posts?cat=Music">
-              Music
-            </Link>
-          </li>
-          <li className="sidebarListItem">
-            <Link className="link" to="/posts?cat=Sport">
-              Sport
-            </Link>
-          </li>
-          <li className="sidebarListItem">
-            <Link className="link" to="/posts?cat=Style">
-              Style
-            </Link>
-          </li>
-          <li className="sidebarListItem">
-            <Link className="link" to="/posts?cat=Tech">
-              Tech
-            </Link>
-          </li>
-          <li className="sidebarListItem">
-            <Link className="link" to="/posts?cat=Cinema">
-              Cinema
-            </Link>
-          </li>
-        </ul>
-      </div>
-      <div className="sidebarItem">
-        <span className="sidebarTitle">FOLLOW US</span>
-        <div className="sidebarSocial">
-          <i className="sidebarIcon fab fa-facebook-square"></i>
-          <i className="sidebarIcon fab fa-instagram-square"></i>
-          <i className="sidebarIcon fab fa-pinterest-square"></i>
-          <i className="sidebarIcon fab fa-twitter-square"></i>
+
+      <div className='sidebarItem'>
+        <span className='sidebarTitle'>FOLLOW US</span>
+        <div className='sidebarSocial'>
+          <i className='sidebarIcon fab fa-facebook-square'></i>
+          <i className='sidebarIcon fab fa-instagram-square'></i>
+          <i className='sidebarIcon fab fa-pinterest-square'></i>
+          <i className='sidebarIcon fab fa-twitter-square'></i>
         </div>
       </div>
     </div>
-  );
+  )
 }
