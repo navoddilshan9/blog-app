@@ -1,24 +1,24 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import DropZone from '../../components/DropZone/DropZone'
 import HttpService from '../../services/httpService'
+import { AuthContext } from '../../utills/AuthContext'
 import './write.css'
 
 export default function Write() {
+  const { getSession } = useContext(AuthContext)
   const [image, setImage] = useState(null)
   const [title, setTitle] = useState(null)
   const [story, setStory] = useState(null)
   const [tags, setTags] = useState(null)
-
+  const [writer, setWriter] = useState(null)
   const navigate = useNavigate()
 
   const submit = (event) => {
     event.preventDefault()
-    console.log({
-      title: title,
-      story: story,
-      image: image,
-      tags: tags,
+    getSession().then((session) => {
+      setWriter(session?.accessToken.payload.client_id)
+      console.log(writer)
     })
     if (title && story && image && tags) {
       HttpService.post('/v1/blogs/create', {
@@ -26,6 +26,7 @@ export default function Write() {
         story: story,
         image: image,
         tags: tags,
+        writer: writer,
       })
         .then((res) => {
           console.log('res')

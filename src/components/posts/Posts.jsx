@@ -16,7 +16,6 @@ export default function Posts() {
     })
       .then((res) => {
         setPosts(JSON.parse(res.data.body).message)
-        console.log(posts?.length)
       })
       .catch((err) => {
         console.log(err)
