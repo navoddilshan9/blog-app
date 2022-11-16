@@ -79,7 +79,7 @@ export default function SignUp() {
             console.log(err)
             setError(err)
           }
-          console.log(response?.user?.pool.clientId)
+
           if (response?.user?.pool.clientId) {
             HttpService.post('/v1/users/create', {
               firstName: data.get('firstName'),
@@ -91,6 +91,7 @@ export default function SignUp() {
               navigate('/login')
             })
           }
+          setOpen(false)
         }
       )
     } else {
@@ -111,7 +112,8 @@ export default function SignUp() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: '#0F100C' }}>
+            {' '}
             <LockOutlinedIcon />
           </Avatar>
 
@@ -189,19 +191,14 @@ export default function SignUp() {
                 />
               </Grid>
               <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox value='allowExtraEmails' color='primary' />
-                  }
-                  label='I want to receive inspiration, marketing promotions and updates via email.'
-                />
+                Please check your email after you register!
               </Grid>
             </Grid>
             <Button
               type='submit'
               fullWidth
               variant='contained'
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, bgcolor: '#0F100C' }}
             >
               Sign Up
             </Button>
@@ -209,7 +206,7 @@ export default function SignUp() {
               <Grid item>
                 <Link
                   to={'/login'}
-                  style={{ textDecoration: 'none' }}
+                  style={{ textDecoration: 'none', color: '#0F100C' }}
                   variant='body2'
                 >
                   Already have an account?

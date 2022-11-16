@@ -39,7 +39,9 @@
   animation: BannerBorder 200s linear alternate infinite;
   animation-delay: 0s;
 }
-
+#wrapper:hover {
+  cursor: pointer;
+}
 /* End of Ex6 Styling  */
 
 /* Global Border Animation   */

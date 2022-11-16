@@ -26,6 +26,7 @@ const Post = ({ post }) => {
             backgroundPosition: 'cover',
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
+            width: '100%',
           }}
         ></header>
         <div class='card__date'>
@@ -41,7 +42,7 @@ const Post = ({ post }) => {
           <div class='card__title'>
             <a href='#'>{post?.title}</a>
           </div>
-          <div class='card__subtitle'>Donec posuere vulputate</div>
+
           <p class='card__description'>{post?.story?.substring(0, 150)}...</p>
         </div>
         <footer class='card__footer'>

@@ -70,10 +70,10 @@ const Banner = () => {
               font-size='70'
             >
               <tspan opacity='0.4' fill='#000' x='63' y='104'>
-                SALE
+                Read
               </tspan>
               <tspan fill='#fff' x='63' y='100'>
-                SALE
+                Read
               </tspan>
             </text>
             <text class='OffEx6'>
@@ -85,7 +85,7 @@ const Banner = () => {
                 x='291'
                 y='45'
               >
-                U P&nbsp;&nbsp;T O
+                M O R E
               </tspan>
               <tspan
                 class='OffTextEx6'
@@ -96,7 +96,7 @@ const Banner = () => {
                 x='275'
                 y='95'
               >
-                80%
+                50%
               </tspan>
               <tspan
                 font-weight='300'

@@ -61,7 +61,7 @@ export default function SignIn() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: '#0F100C' }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component='h1' variant='h5'>
@@ -117,7 +117,7 @@ export default function SignIn() {
               type='submit'
               fullWidth
               variant='contained'
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, bgcolor: '#0F100C' }}
             >
               Sign In
             </Button>
@@ -125,7 +125,7 @@ export default function SignIn() {
               <Grid item xs>
                 <Link
                   to={'/forgetpassword'}
-                  style={{ textDecoration: 'none' }}
+                  style={{ textDecoration: 'none', color: '#0F100C' }}
                   variant='body2'
                 >
                   Forgot password?
@@ -134,7 +134,7 @@ export default function SignIn() {
               <Grid item>
                 <Link
                   to={'/signup'}
-                  style={{ textDecoration: 'none' }}
+                  style={{ textDecoration: 'none', color: '#0F100C' }}
                   variant='body2'
                 >
                   {"Don't have an account?"}
