@@ -1,8 +1,10 @@
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import DropZone from '../../components/DropZone/DropZone'
 import HttpService from '../../services/httpService'
 import { AuthContext } from '../../utills/AuthContext'
+import Backdrop from '@mui/material/Backdrop'
+import CircularProgress from '@mui/material/CircularProgress'
 import './write.css'
 
 export default function Write() {
@@ -12,14 +14,17 @@ export default function Write() {
   const [story, setStory] = useState(null)
   const [tags, setTags] = useState(null)
   const [writer, setWriter] = useState(null)
+  const [open, setOpen] = useState(false)
   const navigate = useNavigate()
-
-  const submit = (event) => {
-    event.preventDefault()
+  useEffect(() => {
     getSession().then((session) => {
       setWriter(session?.accessToken.payload.client_id)
-      console.log(writer)
+      console.log(session?.accessToken.payload.client_id)
     })
+  }, [])
+  const submit = (event) => {
+    setOpen(true)
+    event.preventDefault()
     if (title && story && image && tags) {
       HttpService.post('/v1/blogs/create', {
         title: title,
@@ -30,12 +35,15 @@ export default function Write() {
       })
         .then((res) => {
           console.log('res')
+          setOpen(false)
           navigate('/')
         })
         .catch((err) => {
+          setOpen(false)
           console.log(err)
         })
     } else {
+      setOpen(false)
       alert('refresh and try again')
     }
   }
@@ -88,6 +96,15 @@ export default function Write() {
           Publish
         </button>
       </form>
+      <Backdrop
+        sx={{
+          color: '#fff',
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+        }}
+        open={open}
+      >
+        <CircularProgress color='inherit' />
+      </Backdrop>
     </div>
   )
 }

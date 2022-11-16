@@ -13,8 +13,7 @@ module.exports = function (app) {
   ),
     app.use(
       createProxyMiddleware('/images', {
-        target:
-          'http://blog-app-backend-1-1112069491.us-east-1.elb.amazonaws.com', //server 2
+        target: 'http://image-server-1-2052612344.us-east-1.elb.amazonaws.com', //server 2
         changeOrigin: true,
         headers: {
           Connection: 'keep-alive',
