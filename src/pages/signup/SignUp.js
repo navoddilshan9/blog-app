@@ -17,6 +17,9 @@ import { CognitoUserAttribute } from 'amazon-cognito-identity-js'
 import { useNavigate } from 'react-router-dom'
 import { Alert } from '@mui/material'
 import HttpService from '../../services/httpService'
+import Backdrop from '@mui/material/Backdrop'
+import CircularProgress from '@mui/material/CircularProgress'
+
 function Copyright(props) {
   return (
     <Typography
@@ -40,7 +43,9 @@ const theme = createTheme()
 export default function SignUp() {
   const navigate = useNavigate()
   const [error, setError] = useState()
+  const [open, setOpen] = useState(false)
   const handleSubmit = (event) => {
+    setOpen(true)
     event.preventDefault()
     const data = new FormData(event.currentTarget)
 
@@ -74,18 +79,22 @@ export default function SignUp() {
             console.log(err)
             setError(err)
           }
-          console.log(response)
-          HttpService.post('/users/create', {
-            firstName: data.get('firstName'),
-            lastName: data.get('lastName'),
-            email: data.get('email'),
-            clientId: response.pool.clientId,
-          }).then(() => {
-            navigate('/login')
-          })
+          console.log(response?.user?.pool.clientId)
+          if (response?.user?.pool.clientId) {
+            HttpService.post('/v1/users/create', {
+              firstName: data.get('firstName'),
+              lastName: data.get('lastName'),
+              email: data.get('email'),
+              clientId: response?.user?.pool.clientId,
+            }).then(() => {
+              setOpen(false)
+              navigate('/login')
+            })
+          }
         }
       )
     } else {
+      setOpen(false)
       setError('password are missed match')
     }
   }
@@ -211,6 +220,15 @@ export default function SignUp() {
         </Box>
         <Copyright sx={{ mt: 5 }} />
       </Container>
+      <Backdrop
+        sx={{
+          color: '#fff',
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+        }}
+        open={open}
+      >
+        <CircularProgress color='inherit' />
+      </Backdrop>
     </ThemeProvider>
   )
 }

@@ -21,7 +21,7 @@ export default function Write() {
       tags: tags,
     })
     if (title && story && image && tags) {
-      HttpService.post('/v1//blogs/create', {
+      HttpService.post('/v1/blogs/create', {
         title: title,
         story: story,
         image: image,
