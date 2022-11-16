@@ -16,7 +16,7 @@ import Userpool from '../../utills/Userpool'
 import { CognitoUserAttribute } from 'amazon-cognito-identity-js'
 import { useNavigate } from 'react-router-dom'
 import { Alert } from '@mui/material'
-
+import HttpService from '../../services/httpService'
 function Copyright(props) {
   return (
     <Typography
@@ -69,12 +69,20 @@ export default function SignUp() {
         data.get('password'),
         attributeList,
         null,
-        (err, data) => {
+        (err, response) => {
           if (err) {
             console.log(err)
             setError(err)
           }
-          navigate('/login')
+          console.log(response)
+          HttpService.post('/users/create', {
+            firstName: data.get('firstName'),
+            lastName: data.get('lastName'),
+            email: data.get('email'),
+            clientId: response.pool.clientId,
+          }).then(() => {
+            navigate('/login')
+          })
         }
       )
     } else {
@@ -84,7 +92,6 @@ export default function SignUp() {
 
   return (
     <ThemeProvider theme={theme}>
-      {/* <CenterNotification /> */}
       <Container component='main' maxWidth='xs'>
         <CssBaseline />
         <Box
@@ -98,14 +105,6 @@ export default function SignUp() {
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
-          {error ? (
-            <>
-              {' '}
-              <Alert severity='info'>Registration failed !</Alert>
-            </>
-          ) : (
-            <></>
-          )}
 
           <Typography component='h1' variant='h5'>
             Sign up
@@ -116,6 +115,16 @@ export default function SignUp() {
             onSubmit={handleSubmit}
             sx={{ mt: 3 }}
           >
+            {error ? (
+              <>
+                {' '}
+                <Alert severity='info' sx={{ marginBottom: '10px' }}>
+                  Registration failed !
+                </Alert>
+              </>
+            ) : (
+              <></>
+            )}
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField

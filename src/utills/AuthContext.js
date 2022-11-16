@@ -12,6 +12,7 @@ const Context = (props) => {
           if (err) {
             reject()
           } else {
+            console.log(session)
             resolve(session)
           }
         })
@@ -26,15 +27,12 @@ const Context = (props) => {
       const authDetails = new AuthenticationDetails({ Username, Password })
       user.authenticateUser(authDetails, {
         onSuccess: (dtata) => {
-          console.log(dtata)
           resolve(dtata)
         },
         onFailure: (err) => {
-          console.log(err)
           reject(err)
         },
         newPasswordRequired: (data) => {
-          console.log(data)
           resolve(data)
         },
       })
