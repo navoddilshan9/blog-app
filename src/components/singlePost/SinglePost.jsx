@@ -1,23 +1,29 @@
 import { Alert, TextareaAutosize, TextField } from '@mui/material'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
 import Backdrop from '@mui/material/Backdrop'
 import CircularProgress from '@mui/material/CircularProgress'
-
+import { AuthContext } from '../../utills/AuthContext'
 import HttpService from '../../services/httpService'
 import './singlePost.css'
-
+import ReactTimeAgo from 'react-time-ago'
+import moment from 'moment'
 export default function SinglePost() {
   let { id } = useParams()
+  const { getSession } = useContext(AuthContext)
   const [open, setOpen] = useState(true)
   const navigate = useNavigate()
   const [post, setPost] = useState(null)
   const [edit, setEdit] = useState(false)
-
+  const [writer, setWriter] = useState(null)
   useEffect(() => {
     getPost()
+    getSession().then((session) => {
+      setWriter(session?.accessToken.payload.client_id)
+      console.log(session?.accessToken.payload.client_id)
+    })
   }, [])
 
   const getPost = () => {
@@ -93,32 +99,36 @@ export default function SinglePost() {
               ) : (
                 post.title
               )}
-
-              <div className='singlePostEdit'>
-                <i
-                  className='singlePostIcon far fa-edit'
-                  onClick={() => {
-                    setEdit(true)
-                  }}
-                ></i>
-                <i
-                  className='singlePostIcon far fa-trash-alt'
-                  onClick={() => {
-                    deletePost(post._id)
-                  }}
-                ></i>
-              </div>
+              {writer == post?.writer ? (
+                <>
+                  <div className='singlePostEdit'>
+                    <i
+                      className='singlePostIcon far fa-edit'
+                      onClick={() => {
+                        setEdit(true)
+                      }}
+                    ></i>
+                    <i
+                      className='singlePostIcon far fa-trash-alt'
+                      onClick={() => {
+                        deletePost(post._id)
+                      }}
+                    ></i>
+                  </div>
+                </>
+              ) : (
+                <></>
+              )}
             </h1>
             <div className='singlePostInfo'>
               <span>
-                Author:
-                <b className='singlePostAuthor'>
+                {/* <b className='singlePostAuthor'>
                   <Link className='link' to='/posts?username=Safak'>
                     Safak
                   </Link>
-                </b>
+                </b> */}
               </span>
-              <span>1 day ago</span>
+              <span>{moment(post?.createdAt).fromNow()}</span>
             </div>
             <p className='singlePostDesc'>
               {edit ? (

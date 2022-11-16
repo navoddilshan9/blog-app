@@ -34,7 +34,7 @@ export default function Write() {
         writer: writer,
       })
         .then((res) => {
-          console.log('res')
+          console.log(res)
           setOpen(false)
           navigate('/')
         })
